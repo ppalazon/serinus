@@ -1,0 +1,5 @@
+<beans>
+	<decorators>
+		<decorator>org.jboss.weld.environment.se.threading.RunnableDecorator</decorator>
+	</decorators>
+</beans>
