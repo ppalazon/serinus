@@ -1,14 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.serinus</groupId>
-	<artifactId>api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<parent>
+		<artifactId>parent</artifactId>
+		<groupId>org.serinus</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>serinus-api</artifactId>
 	<name>Serinus REST API</name>
 	<description>API for Connect to Serinus Rest</description>
 	
-	
-
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
