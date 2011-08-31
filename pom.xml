@@ -13,6 +13,7 @@
 	 <module>api</module>
 	 <module>control</module>
 	 <module>doc</module>
+    	<module>ui</module>
   </modules>
 
 </project>
