@@ -40,7 +40,7 @@ public class KeepContact implements Runnable {
 			}
 			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(600000);
 			} catch (InterruptedException e) {
 				log.error(e.getMessage());
 			}

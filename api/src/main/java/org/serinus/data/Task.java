@@ -1,44 +1,64 @@
 package org.serinus.data;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
-/**
- * What's I'm doing now. I need to present me with my user id (email) 
- * 
- * @author ppalazon
- *
- */
-@XmlRootElement
 public class Task {
 
-	private String task;
-	private String user;
+	private String original;
+	private List<String> topics;
+	private List<String> links;
+	private List<String> users;
 
-	@XmlElement
-	public String getTask() {
-		return task;
+	public String getOriginal() {
+		return original;
 	}
 
-	public void setTask(String task) {
-		this.task = task;
+	public void setOriginal(String original) {
+		this.original = original;
 	}
 
-	@XmlElement
-	public String getUser() {
-		return user;
+	public List<String> getTopics() {
+		return topics;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setTopics(List<String> topics) {
+		this.topics = topics;
+	}
+
+	public List<String> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<String> links) {
+		this.links = links;
+	}
+
+	public List<String> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<String> users) {
+		this.users = users;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Task [original=").append(original).append(", topics=")
+				.append(topics).append(", links=").append(links)
+				.append(", users=").append(users).append("]");
+		return builder.toString();
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((task == null) ? 0 : task.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((links == null) ? 0 : links.hashCode());
+		result = prime * result
+				+ ((original == null) ? 0 : original.hashCode());
+		result = prime * result + ((topics == null) ? 0 : topics.hashCode());
+		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
 	}
 
@@ -51,37 +71,27 @@ public class Task {
 		if (getClass() != obj.getClass())
 			return false;
 		Task other = (Task) obj;
-		if (task == null) {
-			if (other.task != null)
+		if (links == null) {
+			if (other.links != null)
 				return false;
-		} else if (!task.equals(other.task))
+		} else if (!links.equals(other.links))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (original == null) {
+			if (other.original != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!original.equals(other.original))
+			return false;
+		if (topics == null) {
+			if (other.topics != null)
+				return false;
+		} else if (!topics.equals(other.topics))
+			return false;
+		if (users == null) {
+			if (other.users != null)
+				return false;
+		} else if (!users.equals(other.users))
 			return false;
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Task [task=");
-		builder.append(task);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	public Task fromString(String t)
-	{
-		Task task = new Task();
-		task.setTask(t);
-		
-		return task;
-	}
-
-	
 }

@@ -7,6 +7,10 @@
 	<packaging>pom</packaging>
 	<name>Serinus Parent</name>
 	<url>http://maven.apache.org</url>
+
+	<properties>
+	  <serinus.version>1.0-SNAPTSHOT</serinus.version>
+	</properties>
 	
 	<modules>
 	 <module>bot</module>

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.serinus.parser.api.Task;
+import org.serinus.data.Task;
 
 
 public class SerinusParser {

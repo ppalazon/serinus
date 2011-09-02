@@ -24,7 +24,7 @@
 			enable third-party plugin if using Maven < 2.1) -->
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 		<!-- Specify the JBoss AS directory to be the JBOSS_HOME environment variable -->
-		<jboss.home>${env.JBOSS_HOME}</jboss.home>
+		<jboss.home>${env.JBOSS7_HOME}</jboss.home>
 	</properties>
 
 	<repositories>

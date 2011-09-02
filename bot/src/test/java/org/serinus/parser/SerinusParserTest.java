@@ -13,7 +13,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.serinus.parser.api.Task;
+import org.serinus.data.Task;
 
 @RunWith(Arquillian.class)
 public class SerinusParserTest {
