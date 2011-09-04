@@ -4,35 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 
 import org.infinispan.Cache;
-import org.infinispan.manager.CacheContainer;
 import org.serinus.cache.data.CacheKey;
 import org.serinus.cache.data.CacheType;
 import org.serinus.data.Task;
 
 public class TaskCache {
 
-	@Resource(name = "java:jboss/infinispan/web")
-	private CacheContainer container;
-	private Cache<CacheKey, List<String>> cache;
-
-	@PostConstruct
-	public void create() {
-		this.cache = this.container.getCache();
-	}
+	@Inject
+	@Default
+	private Cache<CacheKey, MessageList> cache;
 	
 	public CacheKey addTask(Task task)
 	{
-		CacheKey ck = new CacheKey(CacheType.AUTHOR, task.getUser()); 
+		CacheKey ck = new CacheKey(CacheType.AUTHOR, task.getAuthor()); 
 		if(!cache.containsKey(ck))
 		{
-			List<String> tasks = new ArrayList<String>();
-			cache.put(ck, tasks);
+			MessageList ml = new MessageList();
+			cache.put(ck, ml);
 		}
-		List<String> list = cache.get(ck);
-		list.add(task.getTask());
+		MessageList ml = cache.get(ck);
+		ml.getMessages().add(task.getOriginal());
 		
 		return ck;
 	}

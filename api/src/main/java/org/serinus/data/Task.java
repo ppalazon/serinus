@@ -5,6 +5,16 @@ import java.util.List;
 public class Task {
 
 	private String original;
+	private String author;
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	private List<String> topics;
 	private List<String> links;
 	private List<String> users;
@@ -44,9 +54,10 @@ public class Task {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Task [original=").append(original).append(", topics=")
-				.append(topics).append(", links=").append(links)
-				.append(", users=").append(users).append("]");
+		builder.append("Task [original=").append(original).append(", author=")
+				.append(author).append(", topics=").append(topics)
+				.append(", links=").append(links).append(", users=")
+				.append(users).append("]");
 		return builder.toString();
 	}
 
@@ -54,6 +65,7 @@ public class Task {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((links == null) ? 0 : links.hashCode());
 		result = prime * result
 				+ ((original == null) ? 0 : original.hashCode());
@@ -71,6 +83,11 @@ public class Task {
 		if (getClass() != obj.getClass())
 			return false;
 		Task other = (Task) obj;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
+			return false;
 		if (links == null) {
 			if (other.links != null)
 				return false;
