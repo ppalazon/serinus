@@ -36,10 +36,10 @@ public class SerinusRESTService implements SerinusPost {
 
 	@Override
 	@PUT
-	@Produces("text/xml")
+	@Produces("application/xml")
 	@Path("/post-task")
-	@Consumes("text/xml")
-	public Response postTask(@PathParam("task") Task task) {
+	@Consumes("application/xml")
+	public Response postTask(Task task) {
 
 		log.info(String.valueOf(task));
 		
