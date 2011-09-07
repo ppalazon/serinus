@@ -44,15 +44,21 @@ public class SerinusMessageListener implements MessageListener {
 		Message mesg = new Message();
 		
 		mesg.setSubject("Parser task");
-		mesg.setBody("OK");
 		
-		Task task = serinusParser.parser(message.getBody());
+		
+		Task task = serinusParser.parser(message);
 		
 		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(task);
 		
 		if(postTask.getStatus()!=Status.OK.getStatusCode())
 		{
 			log.error("Can't connect to Serinus Control");
+			
+			mesg.setBody("Error contact with control");
+		}
+		else
+		{
+			mesg.setBody("OK");
 		}
 		
 		log.info(String.valueOf(task));

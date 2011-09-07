@@ -1,5 +1,6 @@
 package org.serinus.api;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -9,11 +10,13 @@ import javax.ws.rs.core.Response;
 
 import org.serinus.data.Task;
 
-@Path("/post")
+@Path(value="/post")
 public interface SerinusPost {
 	
 	@PUT
 	@Produces("text/xml")
+	@Path("/post-task")
+	@Consumes("text/xml")
 	public Response postTask(@PathParam("task") Task task);
 	
 	@GET

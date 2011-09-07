@@ -11,6 +11,7 @@ import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jivesoftware.smack.packet.Message;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.serinus.data.Task;
@@ -39,11 +40,13 @@ public class SerinusParserTest {
 	@Test
 	public void testParser()
 	{
-		String text = "Despliegue de las nuevas herramientas en #development, avisar a @ppalazon. Todo se puede ver en http://www.google.com/search?client=ubuntu&channel=fs&q=mk-archiver&ie=utf-8&oe=utf-8";
+		Message message = new Message();
+		message.setBody("Despliegue de las nuevas herramientas en #development, avisar a @ppalazon. Todo se puede ver en http://www.google.com/search?client=ubuntu&channel=fs&q=mk-archiver&ie=utf-8&oe=utf-8");
+		message.setFrom("ppalazon@serinus.org");
 		
-		Task task = serinusParser.parser(text);
+		Task task = serinusParser.parser(message);
 		Assert.assertNotNull(task);
-		Assert.assertEquals(text, task.getOriginal());
+		Assert.assertEquals(message.getBody(), task.getOriginal());
 		Assert.assertEquals(1, task.getTopics().size());
 		Assert.assertEquals(1, task.getUsers().size());
 		Assert.assertEquals(1, task.getLinks().size());

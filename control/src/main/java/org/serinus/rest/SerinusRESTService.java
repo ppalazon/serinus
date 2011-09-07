@@ -2,10 +2,13 @@ package org.serinus.rest;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.jboss.logging.Logger;
@@ -34,7 +37,9 @@ public class SerinusRESTService implements SerinusPost {
 	@Override
 	@PUT
 	@Produces("text/xml")
-	public Response postTask(Task task) {
+	@Path("/post-task")
+	@Consumes("text/xml")
+	public Response postTask(@PathParam("task") Task task) {
 
 		log.info(String.valueOf(task));
 		
@@ -47,7 +52,7 @@ public class SerinusRESTService implements SerinusPost {
 	@GET
 	@Path("/test/{test:\\S*}")
 	@Produces("text/xml")
-	public Response test(String test) {
+	public Response test(@PathParam("test") String test) {
 		log.info(String.valueOf(test));
 
 		return Response.ok().build();

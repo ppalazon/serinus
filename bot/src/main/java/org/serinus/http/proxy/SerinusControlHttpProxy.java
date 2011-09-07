@@ -21,14 +21,15 @@ public class SerinusControlHttpProxy {
 		
 		httpClient.getParams().setParameter(HttpConnectionParams.CONNECTION_TIMEOUT, new Integer(5000));
 		httpClient.getParams().setParameter(HttpConnectionParams.SO_TIMEOUT, new Integer(30000));
-
-		clientExecutor = new ApacheHttpClientExecutor(httpClient);
+		
+		clientExecutor = new ApacheHttpClientExecutor(httpClient);		
+		
 	}
 	
 	public SerinusPost getSerinusPost()
 	{
 		SerinusPost serinusPost = ProxyFactory.create(
-				SerinusPost.class, "http://localhost:8080/serinus-control/rest/post", clientExecutor);
+				SerinusPost.class, "http://localhost:8080/serinus-control/rest", clientExecutor);
 		return serinusPost;
 	}
 

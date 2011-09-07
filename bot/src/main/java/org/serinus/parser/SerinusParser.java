@@ -5,19 +5,21 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jivesoftware.smack.packet.Message;
 import org.serinus.data.Task;
 
 
 public class SerinusParser {
 	
-	public Task parser(String text)
+	public Task parser(Message text)
 	{
 		Task task = new Task();
 		
-		task.setOriginal(text);
-		task.setLinks(parserLinks(text));
-		task.setUsers(parserUsers(text));
-		task.setTopics(parserTopics(text));
+		task.setOriginal(text.getBody());
+		task.setAuthor(text.getFrom());
+		task.setLinks(parserLinks(text.getBody()));
+		task.setUsers(parserUsers(text.getBody()));
+		task.setTopics(parserTopics(text.getBody()));
 		
 		return task;
 	}
