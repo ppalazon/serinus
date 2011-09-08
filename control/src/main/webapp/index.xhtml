@@ -30,21 +30,19 @@
 		        return data.msg;
 		    }
 		</script>
-		<rich:panel>
-			<rich:panel styleClass="tasks" bodyClass="generaltask">
+		<rich:panel id="serinustask" styleClass="tasks"
+			bodyClass="generaltask">
+			<a4j:repeat value="#{taskMonitor.allMessages}" var="task">
 				<div>
-					<a4j:repeat value="#{taskMonitor.allMessages}" var="task">
-						<h:outputText value="#{task}" />
-					</a4j:repeat>
+					<h:outputText value="#{task}" />
 				</div>
-			</rich:panel>
+			</a4j:repeat>
 
-			<h:form>
-				<a4j:push address="#{taskMonitor.generalSubtopic}@serinustask"
-					onerror="alert(event.rf.data)"
-					ondataavailable="jQuery('&lt;div/&gt;').prependTo('.generaltask').text(getMessageString(event.rf.data))" />
-			</h:form>
 		</rich:panel>
+
+		<h:form>
+			<a4j:poll interval="4000" render="serinustask"></a4j:poll>
+		</h:form>
 
 	</ui:define>
 </ui:composition>
