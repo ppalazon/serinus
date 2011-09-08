@@ -31,10 +31,12 @@ import javax.faces.event.SystemEventListener;
  * To change this template use File | Settings | File Templates.
  */
 public class TopicsInitializer implements SystemEventListener {
+	
+	public static final String TOPIC_NAME = "serinustask";
 
     public void processEvent(SystemEvent event) throws AbortProcessingException {
         TopicsContext topicsContext = TopicsContext.lookup();
-        Topic topic = topicsContext.getOrCreateTopic(new TopicKey("serinustask"));
+        Topic topic = topicsContext.getOrCreateTopic(new TopicKey(TOPIC_NAME));
         topic.setMessageDataSerializer(DefaultMessageDataSerializer.instance());
         topic.addTopicListener(new SessionTopicListener() {
 

@@ -18,6 +18,6 @@ package org.serinus.cache.data;
 
 public enum CacheType {
 	
-	AUTHOR, TOPIC
+	AUTHOR, TOPIC, GENERAL
 
 }

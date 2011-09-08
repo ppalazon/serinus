@@ -45,7 +45,28 @@ public class TaskCache {
 		MessageList ml = cache.get(ck);
 		ml.getMessages().add(task.getOriginal());
 		
+		CacheKey gen = new CacheKey(CacheType.GENERAL, "all"); 
+		if(!cache.containsKey(gen))
+		{
+			MessageList mg = new MessageList();
+			cache.put(gen, mg);
+		}
+		MessageList mg = cache.get(gen);
+		mg.getMessages().add(task.getOriginal());
+		
 		return ck;
+	}
+	
+	public List<String> getAllMessages()
+	{
+		CacheKey gen = new CacheKey(CacheType.GENERAL, "all");
+		if(cache.containsKey(gen))
+		{
+			return cache.get(gen).getMessages();
+		}
+		
+		return new ArrayList<String>();
+		
 	}
 
 }

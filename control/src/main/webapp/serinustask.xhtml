@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright 2011. Pablo Palazon (pablo.palazon@gmail.com)
   ~
@@ -14,21 +15,21 @@
   ~    limitations under the License.
   -->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-   <title>Serinus Control App</title>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <h:outputStylesheet name="css/screen.css" />
-</h:head>
-<h:body>
-   <div id="container">
-      <div id="content">
-         <ui:insert name="content"></ui:insert>
-      </div>
-   </div>
-</h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Serinus App Control</h1>
+
+		<rich:panel>
+			<a4j:repeat value="#{taskMonitor.allMessages}" var="task">
+				<h:outputText value="#{task}" />
+			</a4j:repeat>
+		</rich:panel>
+
+	</ui:define>
+</ui:composition>
