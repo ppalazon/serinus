@@ -1,11 +1,7 @@
 package org.serinus.ui;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
@@ -15,8 +11,7 @@ import org.richfaces.application.push.MessageException;
 import org.richfaces.application.push.TopicKey;
 import org.richfaces.application.push.TopicsContext;
 import org.serinus.cache.TaskCache;
-import org.serinus.cache.data.CacheKey;
-import org.serinus.cache.data.CacheType;
+import org.serinus.data.Task;
 import org.serinus.push.PushMessage;
 import org.serinus.push.TopicsInitializer;
 
@@ -56,7 +51,7 @@ public class TaskMonitor {
 		}
 	}
 	
-	public List<String> getAllMessages()
+	public List<Task> getAllMessages()
 	{
 		return taskCache.getAllMessages();		
 	}

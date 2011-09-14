@@ -19,20 +19,22 @@ package org.serinus.cache;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.serinus.data.Task;
+
 public class MessageList {
 	
-	private List<String> messages;
+	private List<Task> messages;
 	
 	public MessageList()
 	{
-		this.messages = new LinkedList<String>();
+		this.messages = new LinkedList<Task>();
 	}
 
-	public List<String> getMessages() {
+	public List<Task> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(List<String> messages) {
+	public void setMessages(List<Task> messages) {
 		this.messages = messages;
 	}
 	

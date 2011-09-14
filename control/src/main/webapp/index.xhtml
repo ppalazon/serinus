@@ -34,7 +34,15 @@
 			bodyClass="generaltask">
 			<a4j:repeat value="#{taskMonitor.allMessages}" var="task">
 				<div>
-					<h:outputText value="#{task}" />
+					<ul>
+						<li><h:outputText value="#{task.original}" /></li>
+						<li><h:outputText value="#{task.author}" /></li>
+						<li><h:outputText value="#{task.date}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+							</h:outputText>
+						</li>
+						<li><h:outputText value="#{task.uuid}" /></li>
+					</ul>
 				</div>
 			</a4j:repeat>
 

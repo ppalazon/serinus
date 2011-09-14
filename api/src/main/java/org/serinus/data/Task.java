@@ -16,19 +16,20 @@
 
 package org.serinus.data;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Task {
+public class Task implements Serializable {
 	
 	private String original;	
-	private String author;	
-	private List<String> topics;	
-	private List<String> links;	
-	private List<String> users;
+	private String author;
+	private Date date;
+	private String uuid;
 
 	@Override
 	public boolean equals(Object obj) {
@@ -44,25 +45,20 @@ public class Task {
 				return false;
 		} else if (!author.equals(other.author))
 			return false;
-		if (links == null) {
-			if (other.links != null)
+		if (date == null) {
+			if (other.date != null)
 				return false;
-		} else if (!links.equals(other.links))
+		} else if (!date.equals(other.date))
 			return false;
 		if (original == null) {
 			if (other.original != null)
 				return false;
 		} else if (!original.equals(other.original))
 			return false;
-		if (topics == null) {
-			if (other.topics != null)
+		if (uuid == null) {
+			if (other.uuid != null)
 				return false;
-		} else if (!topics.equals(other.topics))
-			return false;
-		if (users == null) {
-			if (other.users != null)
-				return false;
-		} else if (!users.equals(other.users))
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}
@@ -73,8 +69,8 @@ public class Task {
 	}
 
 	@XmlElement
-	public List<String> getLinks() {
-		return links;
+	public Date getDate() {
+		return date;
 	}
 
 	@XmlElement
@@ -83,13 +79,8 @@ public class Task {
 	}
 
 	@XmlElement
-	public List<String> getTopics() {
-		return topics;
-	}
-
-	@XmlElement
-	public List<String> getUsers() {
-		return users;
+	public String getUuid() {
+		return uuid;
 	}
 
 	@Override
@@ -97,11 +88,10 @@ public class Task {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result + ((links == null) ? 0 : links.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result
 				+ ((original == null) ? 0 : original.hashCode());
-		result = prime * result + ((topics == null) ? 0 : topics.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -109,29 +99,24 @@ public class Task {
 		this.author = author;
 	}
 
-	public void setLinks(List<String> links) {
-		this.links = links;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public void setOriginal(String original) {
 		this.original = original;
 	}
 
-	public void setTopics(List<String> topics) {
-		this.topics = topics;
-	}
-
-	public void setUsers(List<String> users) {
-		this.users = users;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Task [original=").append(original).append(", author=")
-				.append(author).append(", topics=").append(topics)
-				.append(", links=").append(links).append(", users=")
-				.append(users).append("]");
+				.append(author).append(", date=").append(date)
+				.append(", uuid=").append(uuid).append("]");
 		return builder.toString();
 	}
 

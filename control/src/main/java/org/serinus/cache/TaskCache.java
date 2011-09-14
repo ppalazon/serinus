@@ -43,7 +43,7 @@ public class TaskCache {
 			cache.put(ck, ml);
 		}
 		MessageList ml = cache.get(ck);
-		ml.getMessages().add(task.getOriginal());
+		ml.getMessages().add(task);
 		
 		CacheKey gen = new CacheKey(CacheType.GENERAL, "all"); 
 		if(!cache.containsKey(gen))
@@ -52,12 +52,12 @@ public class TaskCache {
 			cache.put(gen, mg);
 		}
 		MessageList mg = cache.get(gen);
-		mg.getMessages().add(task.getOriginal());
+		mg.getMessages().add(task);
 		
 		return ck;
 	}
 	
-	public List<String> getAllMessages()
+	public List<Task> getAllMessages()
 	{
 		CacheKey gen = new CacheKey(CacheType.GENERAL, "all");
 		if(cache.containsKey(gen))
@@ -65,7 +65,7 @@ public class TaskCache {
 			return cache.get(gen).getMessages();
 		}
 		
-		return new ArrayList<String>();
+		return new ArrayList<Task>();
 		
 	}
 

@@ -17,16 +17,27 @@
 package org.serinus.xmpp;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.UUID;
+
+import javax.inject.Inject;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.jboss.weld.logging.Category;
 import org.jboss.weld.logging.LoggerFactory;
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.packet.Presence;
+import org.serinus.data.Task;
+import org.serinus.http.proxy.SerinusControlHttpProxy;
 import org.slf4j.cal10n.LocLogger;
 
 public class SerinusRosterListener implements RosterListener {
 	
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BEAN);
+	
+	@Inject
+	SerinusControlHttpProxy serinusControlHttpProxy;
 
 	@Override
 	public void entriesAdded(Collection<String> addresses) {
@@ -55,6 +66,21 @@ public class SerinusRosterListener implements RosterListener {
 	@Override
 	public void presenceChanged(Presence presence) {
 		log.info("Presence changed "+presence.getFrom() +" - "+presence);
+		
+		Task task = new Task();
+		
+		//A velocity o freemarker
+		task.setOriginal("Change presence to "+presence.getStatus()+ " #presence #"+presence.getType()+ (presence.getMode()!=null?"#"+presence.getMode():""));
+		task.setDate(new Date());
+		task.setAuthor(presence.getFrom());
+		task.setUuid(UUID.randomUUID().toString());
+		
+		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(task);
+		
+		if(postTask.getStatus()!=Status.OK.getStatusCode())
+		{
+			log.error("Can't connect to Serinus Control");
+		}		
 	}
 
 }

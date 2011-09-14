@@ -16,7 +16,11 @@
 
 package org.serinus.xmpp;
 
+import java.util.Date;
+import java.util.UUID;
+
 import javax.inject.Inject;
+import javax.jms.JMSException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -26,9 +30,10 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
+import org.serinus.control.jms.JMSCommunication;
 import org.serinus.data.Task;
+import org.serinus.exception.SerinusBotException;
 import org.serinus.http.proxy.SerinusControlHttpProxy;
-import org.serinus.parser.SerinusParser;
 import org.slf4j.cal10n.LocLogger;
 
 
@@ -36,46 +41,62 @@ public class SerinusMessageListener implements MessageListener {
 	
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BEAN);
 	
-	@Inject
-	SerinusParser serinusParser;
+//	@Inject
+//	SerinusControlHttpProxy serinusControlHttpProxy;
 	
-	@Inject
-	SerinusControlHttpProxy serinusControlHttpProxy;
+	@Inject JMSCommunication jmsCommunication;
 	
 	@Override
-	public void processMessage(Chat chat, Message message) {
-		
-		Message mesg = parserTaskMessage(message);
-		
+	public void processMessage(Chat chat, Message message) {		
 		try {
+			Message mesg = parserTaskMessage(message);
 			chat.sendMessage(mesg);
 		} catch (XMPPException e) {
+			log.error(e.getMessage());
+		} catch (SerinusBotException e) {
 			log.error(e.getMessage());
 		}
 		
 	}
 	
-	public Message parserTaskMessage(Message message)
+	public Message parserTaskMessage(Message message) throws SerinusBotException
 	{
+		if(message.getBody()==null)
+		{
+			throw new SerinusBotException("Message without body");
+		}
 		Message mesg = new Message();
 		
-		mesg.setSubject("Parser task");
+		mesg.setSubject("Parser task");		
 		
+		Task task = new Task();
+		task.setOriginal(message.getBody());
+		task.setDate(new Date());
+		task.setAuthor(message.getFrom());
+		task.setUuid(UUID.randomUUID().toString());
 		
-		Task task = serinusParser.parser(message);
+//		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(task);
+//		
+//		if(postTask.getStatus()!=Status.OK.getStatusCode())
+//		{
+//			log.error("Can't connect to Serinus Control");
+//			
+//			mesg.setBody("Error contact with control");
+//		}
+//		else
+//		{
+//			mesg.setBody("OK");
+//		}
 		
-		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(task);
-		
-		if(postTask.getStatus()!=Status.OK.getStatusCode())
-		{
-			log.error("Can't connect to Serinus Control");
-			
+		try {
+			jmsCommunication.sendTask(task);
+			mesg.setBody("OK");
+		} catch (JMSException e) {
+			log.error(e.getMessage());
 			mesg.setBody("Error contact with control");
 		}
-		else
-		{
-			mesg.setBody("OK");
-		}
+		
+		
 		
 		log.info(String.valueOf(task));
 		
