@@ -20,19 +20,15 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.inject.Inject;
-import javax.jms.JMSException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.hornetq.api.core.HornetQException;
 import org.jboss.weld.logging.Category;
 import org.jboss.weld.logging.LoggerFactory;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
-import org.serinus.control.jms.HornetQCommunication;
-import org.serinus.control.jms.JMSCommunication;
 import org.serinus.data.Task;
 import org.serinus.exception.SerinusBotException;
 import org.serinus.http.proxy.SerinusControlHttpProxy;
@@ -45,8 +41,6 @@ public class SerinusMessageListener implements MessageListener {
 	
 	@Inject
 	SerinusControlHttpProxy serinusControlHttpProxy;
-	
-//	@Inject HornetQCommunication hornetQCommunication;
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {		
@@ -89,16 +83,6 @@ public class SerinusMessageListener implements MessageListener {
 		{
 			mesg.setBody("OK");
 		}
-		
-//		try {
-//			hornetQCommunication.sendTask(task);
-//			mesg.setBody("OK");
-//		} catch (HornetQException e) {
-//			log.error(e.getMessage());
-//			mesg.setBody("Error contact with control");
-//		}
-		
-		
 		
 		log.info(String.valueOf(task));
 		
