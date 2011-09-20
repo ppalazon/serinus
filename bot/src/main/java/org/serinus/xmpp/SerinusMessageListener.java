@@ -24,12 +24,14 @@ import javax.jms.JMSException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.hornetq.api.core.HornetQException;
 import org.jboss.weld.logging.Category;
 import org.jboss.weld.logging.LoggerFactory;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
+import org.serinus.control.jms.HornetQCommunication;
 import org.serinus.control.jms.JMSCommunication;
 import org.serinus.data.Task;
 import org.serinus.exception.SerinusBotException;
@@ -41,10 +43,10 @@ public class SerinusMessageListener implements MessageListener {
 	
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BEAN);
 	
-//	@Inject
-//	SerinusControlHttpProxy serinusControlHttpProxy;
+	@Inject
+	SerinusControlHttpProxy serinusControlHttpProxy;
 	
-	@Inject JMSCommunication jmsCommunication;
+//	@Inject HornetQCommunication hornetQCommunication;
 	
 	@Override
 	public void processMessage(Chat chat, Message message) {		
@@ -75,26 +77,26 @@ public class SerinusMessageListener implements MessageListener {
 		task.setAuthor(message.getFrom());
 		task.setUuid(UUID.randomUUID().toString());
 		
-//		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(task);
-//		
-//		if(postTask.getStatus()!=Status.OK.getStatusCode())
-//		{
-//			log.error("Can't connect to Serinus Control");
-//			
-//			mesg.setBody("Error contact with control");
-//		}
-//		else
-//		{
-//			mesg.setBody("OK");
-//		}
+		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(task);
 		
-		try {
-			jmsCommunication.sendTask(task);
-			mesg.setBody("OK");
-		} catch (JMSException e) {
-			log.error(e.getMessage());
+		if(postTask.getStatus()!=Status.OK.getStatusCode())
+		{
+			log.error("Can't connect to Serinus Control");
+			
 			mesg.setBody("Error contact with control");
 		}
+		else
+		{
+			mesg.setBody("OK");
+		}
+		
+//		try {
+//			hornetQCommunication.sendTask(task);
+//			mesg.setBody("OK");
+//		} catch (HornetQException e) {
+//			log.error(e.getMessage());
+//			mesg.setBody("Error contact with control");
+//		}
 		
 		
 		
