@@ -24,7 +24,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.jboss.logging.Logger;
@@ -32,7 +31,6 @@ import org.jboss.seam.solder.logging.Category;
 import org.serinus.api.SerinusPost;
 import org.serinus.cache.TaskCache;
 import org.serinus.data.Task;
-import org.serinus.ui.TaskMonitor;
 
 /**
  * JAX-RS Example
@@ -50,9 +48,6 @@ public class SerinusRESTService implements SerinusPost {
 	
 	@Inject
 	TaskCache taskCache;
-	
-	@Inject
-	TaskMonitor taskMonitor;
 
 	@Override
 	@PUT
@@ -64,8 +59,7 @@ public class SerinusRESTService implements SerinusPost {
 		log.info(String.valueOf(task));
 		
 		taskCache.addTask(task);
-		taskMonitor.send(task.getOriginal());
-
+		
 		return Response.ok().build();
 	}
 

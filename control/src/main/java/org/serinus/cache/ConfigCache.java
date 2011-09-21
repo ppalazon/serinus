@@ -20,6 +20,7 @@ import javax.enterprise.inject.Produces;
 
 import org.infinispan.cdi.Infinispan;
 import org.infinispan.config.Configuration;
+import org.infinispan.config.Configuration.CacheMode;
 import org.infinispan.eviction.EvictionStrategy;
 
 public class ConfigCache {
@@ -29,8 +30,9 @@ public class ConfigCache {
     @Produces
     public Configuration serinusCacheConfiguration() {
         return new Configuration().fluent()
-                    .eviction().strategy(EvictionStrategy.FIFO).maxEntries(4)
-                    .build();
+			.mode(CacheMode.LOCAL).dataContainer().storeAsBinary()
+            .eviction().strategy(EvictionStrategy.FIFO).maxEntries(4)
+            .build();
     }
 
 }

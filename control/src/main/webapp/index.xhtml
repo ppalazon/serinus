@@ -25,11 +25,6 @@
 	<ui:define name="content">
 		<h1>Serinus App Control</h1>
 
-		<script>
-		    function getMessageString(data){
-		        return data.msg;
-		    }
-		</script>
 		<rich:panel id="serinustask" styleClass="tasks"
 			bodyClass="generaltask">
 			<a4j:repeat value="#{taskMonitor.allMessages}" var="task">

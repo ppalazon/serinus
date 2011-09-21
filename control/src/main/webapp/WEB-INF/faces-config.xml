@@ -22,13 +22,6 @@
         http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-    <application>
-        <system-event-listener>
-            <system-event-listener-class>org.serinus.push.TopicsInitializer</system-event-listener-class>
-            <system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
-        </system-event-listener>
-    </application>
-
     <!-- This descriptor activates the JSF 2.0 Servlet -->
 
     <!-- Write your navigation rules here. You are encouraged to use CDI for
