@@ -45,7 +45,7 @@ public class SerinusControlHttpProxy {
 	public SerinusPost getSerinusPost()
 	{
 		SerinusPost serinusPost = ProxyFactory.create(
-				SerinusPost.class, "http://localhost:8080/serinus-control/rest", clientExecutor);
+				SerinusPost.class, "http://localhost:18080/serinus-control/rest", clientExecutor);
 		return serinusPost;
 	}
 

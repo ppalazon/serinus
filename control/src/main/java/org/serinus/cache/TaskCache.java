@@ -28,45 +28,43 @@ import org.serinus.cache.data.CacheKey;
 import org.serinus.cache.data.CacheType;
 import org.serinus.data.Task;
 
-public class TaskCache {
+public class TaskCache
+{
 
-	@Inject
-	@Default
-	private Cache<CacheKey, MessageList> cache;
-	
-	public CacheKey addTask(Task task)
-	{
-		CacheKey ck = new CacheKey(CacheType.AUTHOR, task.getAuthor()); 
-		if(!cache.containsKey(ck))
-		{
-			MessageList ml = new MessageList();
-			cache.put(ck, ml);
-		}
-		MessageList ml = cache.get(ck);
-		ml.getMessages().add(task);
-		
-		CacheKey gen = new CacheKey(CacheType.GENERAL, "all"); 
-		if(!cache.containsKey(gen))
-		{
-			MessageList mg = new MessageList();
-			cache.put(gen, mg);
-		}
-		MessageList mg = cache.get(gen);
-		mg.getMessages().add(task);
-		
-		return ck;
+    @Inject
+    @Default
+    private Cache<CacheKey, MessageList> cache;
+
+    public CacheKey addTask(Task task)
+    {
+	CacheKey ck = new CacheKey(CacheType.AUTHOR, task.getAuthor());
+	if (!cache.containsKey(ck)) {
+	    MessageList ml = new MessageList();
+	    cache.put(ck, ml);
 	}
-	
-	public List<Task> getAllMessages()
-	{
-		CacheKey gen = new CacheKey(CacheType.GENERAL, "all");
-		if(cache.containsKey(gen))
-		{
-			return cache.get(gen).getMessages();
-		}
-		
-		return new ArrayList<Task>();
-		
+	MessageList ml = cache.get(ck);
+	ml.getMessages().add(task);
+
+	CacheKey gen = new CacheKey(CacheType.GENERAL, "all");
+	if (!cache.containsKey(gen)) {
+	    MessageList mg = new MessageList();
+	    cache.put(gen, mg);
 	}
+	MessageList mg = cache.get(gen);
+	mg.getMessages().add(task);
+
+	return ck;
+    }
+
+    public List<Task> getAllMessages()
+    {
+	CacheKey gen = new CacheKey(CacheType.GENERAL, "all");
+	if (cache.containsKey(gen)) {
+	    return cache.get(gen).getMessages();
+	}
+
+	return new ArrayList<Task>();
+
+    }
 
 }

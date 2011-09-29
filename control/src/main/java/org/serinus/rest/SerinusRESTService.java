@@ -31,6 +31,7 @@ import org.jboss.seam.solder.logging.Category;
 import org.serinus.api.SerinusPost;
 import org.serinus.cache.TaskCache;
 import org.serinus.data.Task;
+import org.serinus.graph.dao.SerinusDao;
 
 /**
  * JAX-RS Example
@@ -39,37 +40,43 @@ import org.serinus.data.Task;
  * table.
  */
 @RequestScoped
-@Path(value="/post")
-public class SerinusRESTService implements SerinusPost {
+@Path(value = "/post")
+public class SerinusRESTService implements SerinusPost
+{
 
-	@Inject
-	@Category("serinus")
-	private Logger log;
-	
-	@Inject
-	TaskCache taskCache;
+    @Inject
+    @Category("serinus")
+    private Logger log;
 
-	@Override
-	@PUT
-	@Produces("application/xml")
-	@Path("/post-task")
-	@Consumes("application/xml")
-	public Response postTask(Task task) {
+//    @Inject
+//    TaskCache taskCache;
+    
+    @Inject
+    SerinusDao serinusDao;
 
-		log.info(String.valueOf(task));
-		
-		taskCache.addTask(task);
-		
-		return Response.ok().build();
-	}
+    @Override
+    @PUT
+    @Produces("application/xml")
+    @Path("/post-task")
+    @Consumes("application/xml")
+    public Response postTask(Task task)
+    {
 
-	@Override
-	@GET
-	@Path("/test/{test:\\S*}")
-	@Produces("text/xml")
-	public Response test(@PathParam("test") String test) {
-		log.info(String.valueOf(test));
+	log.info(String.valueOf(task));
 
-		return Response.ok().build();
-	}
+	serinusDao.createSerinusTask(task);
+
+	return Response.ok().build();
+    }
+
+    @Override
+    @GET
+    @Path("/test/{test:\\S*}")
+    @Produces("text/xml")
+    public Response test(@PathParam("test") String test)
+    {
+	log.info(String.valueOf(test));
+
+	return Response.ok().build();
+    }
 }

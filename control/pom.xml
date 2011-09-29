@@ -40,6 +40,7 @@
 		<vaadin.version>6.6.5</vaadin.version>
 		<gwt.version>2.3.0</gwt.version>
 		<gwt.plugin.version>2.2.0</gwt.plugin.version>
+		<neo4j-version>1.5.M01</neo4j-version>
 	</properties>
 
 	<repositories>
@@ -74,22 +75,6 @@
 	</pluginRepositories>
 
 	<dependencies>
-		<!-- Annotation processor to generate the JPA 2.0 metamodel classes for 
-			typesafe criteria queries -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
-			<version>1.1.1.Final</version>
-			<scope>provided</scope>
-			<!-- Excluded because it's provided by the Java EE 6 dependencies -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.hibernate.javax.persistence</groupId>
-					<artifactId>hibernate-jpa-2.0-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<!-- Seam Solder provides convenient, portable CDI extensions such as an 
 			injectable logger -->
 		<dependency>
@@ -113,6 +98,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+
 
 		<!-- Needed for running tests (you may also use TestNG) -->
 		<dependency>
@@ -164,7 +151,7 @@
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-cdi</artifactId>
-			<version>5.0.0.FINAL</version>
+			<version>${infinispan.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.atmosphere</groupId>
@@ -182,27 +169,14 @@
 			<version>4.0.0.Final</version>
 		</dependency>
 		<dependency>
-			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin</artifactId>
-			<version>${vaadin.version}</version>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j</artifactId>
+			<version>${neo4j-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${gwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<classifier>sources</classifier>
-			<scope>provided</scope>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>4.2.0</version>
 		</dependency>
 	</dependencies>
 

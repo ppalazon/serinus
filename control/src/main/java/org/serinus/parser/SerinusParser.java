@@ -21,51 +21,49 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SerinusParser {
-	
-	public List<String> parserLinks(String text)
-	{
-		List<String> links = new ArrayList<String>();
-		
-		Pattern urlPattern = Pattern.compile("((https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\))+[\\w\\d:#@%/;$\\(\\)~_?\\+-=\\.&]*)");
-		
-		Matcher matcher = urlPattern.matcher(text);
-		while(matcher.find())
-		{
-			links.add(matcher.group());
-		}
-		
-		return links;
+public class SerinusParser
+{
+
+    public List<String> parserLinks(String text)
+    {
+	List<String> links = new ArrayList<String>();
+
+	Pattern urlPattern = Pattern.compile("((https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\))+[\\w\\d:#@%/;$\\(\\)~_?\\+-=\\.&]*)");
+
+	Matcher matcher = urlPattern.matcher(text);
+	while (matcher.find()) {
+	    links.add(matcher.group());
 	}
-	
-	public List<String> parserUsers(String text)
-	{
-		List<String> users = new ArrayList<String>();
-		
-		Pattern userPattern = Pattern.compile("(@\\S*)");
-		
-		Matcher matcher = userPattern.matcher(text);
-		while(matcher.find())
-		{
-			users.add(matcher.group());
-		}
-		
-		return users;
+
+	return links;
+    }
+
+    public List<String> parserUsers(String text)
+    {
+	List<String> users = new ArrayList<String>();
+
+	Pattern userPattern = Pattern.compile("(@\\S*)");
+
+	Matcher matcher = userPattern.matcher(text);
+	while (matcher.find()) {
+	    users.add(matcher.group());
 	}
-	
-	public List<String> parserTopics(String text)
-	{
-		List<String> topics = new ArrayList<String>();
-		
-		Pattern topicPattern = Pattern.compile("(#\\S*)");
-		
-		Matcher matcher = topicPattern.matcher(text);
-		while(matcher.find())
-		{
-			topics.add(matcher.group());
-		}
-		
-		return topics;
+
+	return users;
+    }
+
+    public List<String> parserTopics(String text)
+    {
+	List<String> topics = new ArrayList<String>();
+
+	Pattern topicPattern = Pattern.compile("(#\\S*)");
+
+	Matcher matcher = topicPattern.matcher(text);
+	while (matcher.find()) {
+	    topics.add(matcher.group());
 	}
+
+	return topics;
+    }
 
 }
