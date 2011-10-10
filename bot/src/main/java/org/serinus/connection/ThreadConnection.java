@@ -35,21 +35,25 @@ import org.serinus.xmpp.SerinusRosterListener;
 import org.slf4j.cal10n.LocLogger;
 
 @ThreadSerinus
-public class ThreadConnection extends Connection implements Runnable {
+public class ThreadConnection extends Connection implements Runnable
+{
 
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
 			Category.BEAN);
 
 	@Override
-	public void run() {
-		try {
+	public void run()
+	{
+		try
+		{
 
 			connect();
 
 			while (true)
 				;
 
-		} catch (XMPPException e) {
+		} catch (XMPPException e)
+		{
 			log.error(e.getMessage());
 		}
 	}

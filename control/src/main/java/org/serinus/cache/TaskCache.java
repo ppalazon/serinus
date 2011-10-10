@@ -28,15 +28,18 @@ import org.serinus.cache.data.CacheKey;
 import org.serinus.cache.data.CacheType;
 import org.serinus.data.Task;
 
-public class TaskCache {
+public class TaskCache
+{
 
 	@Inject
 	@Default
 	private Cache<CacheKey, MessageList> cache;
 
-	public CacheKey addTask(Task task) {
+	public CacheKey addTask(Task task)
+	{
 		CacheKey ck = new CacheKey(CacheType.AUTHOR, task.getAuthor());
-		if (!cache.containsKey(ck)) {
+		if (!cache.containsKey(ck))
+		{
 			MessageList ml = new MessageList();
 			cache.put(ck, ml);
 		}
@@ -44,7 +47,8 @@ public class TaskCache {
 		ml.getMessages().add(task);
 
 		CacheKey gen = new CacheKey(CacheType.GENERAL, "all");
-		if (!cache.containsKey(gen)) {
+		if (!cache.containsKey(gen))
+		{
 			MessageList mg = new MessageList();
 			cache.put(gen, mg);
 		}
@@ -54,9 +58,11 @@ public class TaskCache {
 		return ck;
 	}
 
-	public List<Task> getAllMessages() {
+	public List<Task> getAllMessages()
+	{
 		CacheKey gen = new CacheKey(CacheType.GENERAL, "all");
-		if (cache.containsKey(gen)) {
+		if (cache.containsKey(gen))
+		{
 			return cache.get(gen).getMessages();
 		}
 

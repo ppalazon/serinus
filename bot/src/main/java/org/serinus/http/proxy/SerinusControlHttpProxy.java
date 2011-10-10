@@ -26,11 +26,13 @@ import org.jboss.resteasy.client.core.executors.ApacheHttpClientExecutor;
 import org.serinus.api.SerinusPost;
 
 @ApplicationScoped
-public class SerinusControlHttpProxy {
+public class SerinusControlHttpProxy
+{
 
 	private ClientExecutor clientExecutor;
 
-	public SerinusControlHttpProxy() {
+	public SerinusControlHttpProxy()
+	{
 		HttpClient httpClient = new HttpClient();
 
 		httpClient.getParams().setParameter(
@@ -42,7 +44,8 @@ public class SerinusControlHttpProxy {
 
 	}
 
-	public SerinusPost getSerinusPost() {
+	public SerinusPost getSerinusPost()
+	{
 		SerinusPost serinusPost = ProxyFactory.create(SerinusPost.class,
 				"http://localhost:8080/serinus-control/rest", clientExecutor);
 		return serinusPost;

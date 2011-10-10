@@ -36,7 +36,8 @@ import org.serinus.xmpp.SerinusRosterListener;
 import org.slf4j.cal10n.LocLogger;
 
 @Default
-public class Connection {
+public class Connection
+{
 
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
 			Category.BEAN);
@@ -55,7 +56,8 @@ public class Connection {
 	@Inject
 	SerinusConnection serinusConnection;
 
-	public void connect() throws XMPPException {
+	public void connect() throws XMPPException
+	{
 		ConnectionConfiguration cc = new ConnectionConfiguration(
 				serinusBotConfig.getHost(), serinusBotConfig.getPort());
 		cc.setCompressionEnabled(true);

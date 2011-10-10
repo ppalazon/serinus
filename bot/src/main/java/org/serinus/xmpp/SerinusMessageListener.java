@@ -34,7 +34,8 @@ import org.serinus.exception.SerinusBotException;
 import org.serinus.http.proxy.SerinusControlHttpProxy;
 import org.slf4j.cal10n.LocLogger;
 
-public class SerinusMessageListener implements MessageListener {
+public class SerinusMessageListener implements MessageListener
+{
 
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
 			Category.BEAN);
@@ -43,21 +44,27 @@ public class SerinusMessageListener implements MessageListener {
 	SerinusControlHttpProxy serinusControlHttpProxy;
 
 	@Override
-	public void processMessage(Chat chat, Message message) {
-		try {
+	public void processMessage(Chat chat, Message message)
+	{
+		try
+		{
 			Message mesg = parserTaskMessage(message);
 			chat.sendMessage(mesg);
-		} catch (XMPPException e) {
+		} catch (XMPPException e)
+		{
 			log.error(e.getMessage());
-		} catch (SerinusBotException e) {
+		} catch (SerinusBotException e)
+		{
 			log.error(e.getMessage());
 		}
 
 	}
 
 	public Message parserTaskMessage(Message message)
-			throws SerinusBotException {
-		if (message.getBody() == null) {
+			throws SerinusBotException
+	{
+		if (message.getBody() == null)
+		{
 			throw new SerinusBotException("Message without body");
 		}
 		Message mesg = new Message();
@@ -73,11 +80,13 @@ public class SerinusMessageListener implements MessageListener {
 		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(
 				task);
 
-		if (postTask.getStatus() != Status.OK.getStatusCode()) {
+		if (postTask.getStatus() != Status.OK.getStatusCode())
+		{
 			log.error("Can't connect to Serinus Control");
 
 			mesg.setBody("Error contact with control");
-		} else {
+		} else
+		{
 			mesg.setBody("OK");
 		}
 

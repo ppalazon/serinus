@@ -32,7 +32,8 @@ import org.serinus.connection.keep.KeepContact;
 import org.slf4j.cal10n.LocLogger;
 
 @ApplicationScoped
-public class SerinusBot {
+public class SerinusBot
+{
 
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
 			Category.BOOTSTRAP);
@@ -49,14 +50,19 @@ public class SerinusBot {
 	@Inject
 	KeepContact keepContact;
 
-	public void initializeSerinusBot(@Observes ContainerInitialized init) {
-		if (serinusBotParameters.getErrors().size() != 0) {
-			for (String err : serinusBotParameters.getErrors()) {
+	public void initializeSerinusBot(@Observes ContainerInitialized init)
+	{
+		if (serinusBotParameters.getErrors().size() != 0)
+		{
+			for (String err : serinusBotParameters.getErrors())
+			{
 				log.error(err);
 			}
-		} else {
+		} else
+		{
 
-			try {
+			try
+			{
 				connection.connect();
 
 				Thread kc = new Thread(keepContact, "Serinus Keep in Contact");
@@ -64,7 +70,8 @@ public class SerinusBot {
 
 				while (true)
 					;
-			} catch (XMPPException e) {
+			} catch (XMPPException e)
+			{
 				log.error(e.getMessage());
 			}
 

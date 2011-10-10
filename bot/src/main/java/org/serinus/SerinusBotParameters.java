@@ -36,13 +36,16 @@ import org.serinus.config.SerinusBotConfig;
 import org.slf4j.cal10n.LocLogger;
 
 @ApplicationScoped
-public class SerinusBotParameters {
+public class SerinusBotParameters
+{
 
-	public List<String> getErrors() {
+	public List<String> getErrors()
+	{
 		return errors;
 	}
 
-	public void setErrors(List<String> errors) {
+	public void setErrors(List<String> errors)
+	{
 		this.errors = errors;
 	}
 
@@ -58,32 +61,40 @@ public class SerinusBotParameters {
 	SerinusBotConfig serinusBotConfig;
 
 	@Inject
-	public void validateParameters() {
+	public void validateParameters()
+	{
 		CommandLineParser parser = new GnuParser();
-		try {
+		try
+		{
 			CommandLine line = parser.parse(getCLIOptions(),
 					params.toArray(new String[] {}));
-			if (line.hasOption("host")) {
+			if (line.hasOption("host"))
+			{
 				serinusBotConfig.setHost(line.getOptionValue("host"));
 			}
-			if (line.hasOption("port")) {
+			if (line.hasOption("port"))
+			{
 				serinusBotConfig.setPort(Integer.valueOf(line
 						.getOptionValue("port")));
 			}
-			if (line.hasOption("user")) {
+			if (line.hasOption("user"))
+			{
 				serinusBotConfig.setUserBot(line.getOptionValue("user"));
 			}
-			if (line.hasOption("password")) {
+			if (line.hasOption("password"))
+			{
 				serinusBotConfig
 						.setPasswordBot(line.getOptionValue("password"));
 			}
-		} catch (ParseException e) {
+		} catch (ParseException e)
+		{
 			errors.add(e.getMessage());
 		}
 	}
 
 	@SuppressWarnings("static-access")
-	public Options getCLIOptions() {
+	public Options getCLIOptions()
+	{
 		Option host = OptionBuilder.withArgName("host").hasArg()
 				.withDescription("xmpp server host").isRequired(true)
 				.create("host");

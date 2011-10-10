@@ -12,7 +12,8 @@ import org.serinus.graph.GraphManager;
 
 @GraphTransaction
 @Interceptor
-public class GraphTransactionInterceptor {
+public class GraphTransactionInterceptor
+{
 
 	@Inject
 	GraphManager graphManager;
@@ -25,14 +26,17 @@ public class GraphTransactionInterceptor {
 	 * @throws Exception
 	 */
 	@AroundInvoke
-	public Object manageTransaction(InvocationContext ctx) throws Exception {
+	public Object manageTransaction(InvocationContext ctx) throws Exception
+	{
 		Transaction graphTrans = graphManager.getGraphDatabaseService()
 				.beginTx();
 		Object result = null;
-		try {
+		try
+		{
 			result = ctx.proceed();
 			graphTrans.success();
-		} finally {
+		} finally
+		{
 			graphTrans.finish();
 		}
 		return result;

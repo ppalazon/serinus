@@ -23,12 +23,14 @@ import org.infinispan.config.Configuration;
 import org.infinispan.config.Configuration.CacheMode;
 import org.infinispan.eviction.EvictionStrategy;
 
-public class ConfigCache {
+public class ConfigCache
+{
 
 	@Infinispan("serinus-cache")
 	@SerinusCache
 	@Produces
-	public Configuration serinusCacheConfiguration() {
+	public Configuration serinusCacheConfiguration()
+	{
 		return new Configuration().fluent().mode(CacheMode.LOCAL)
 				.dataContainer().storeAsBinary().eviction()
 				.strategy(EvictionStrategy.FIFO).maxEntries(4).build();

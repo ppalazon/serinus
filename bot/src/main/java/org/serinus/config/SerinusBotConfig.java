@@ -22,7 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @ApplicationScoped
-public class SerinusBotConfig {
+public class SerinusBotConfig
+{
 
 	private String host;
 	private Integer port;
@@ -30,38 +31,46 @@ public class SerinusBotConfig {
 	private String passwordBot;
 
 	@XmlElement
-	public String getHost() {
+	public String getHost()
+	{
 		return host;
 	}
 
-	public void setHost(String host) {
+	public void setHost(String host)
+	{
 		this.host = host;
 	}
 
 	@XmlElement
-	public Integer getPort() {
+	public Integer getPort()
+	{
 		return port;
 	}
 
-	public void setPort(Integer port) {
+	public void setPort(Integer port)
+	{
 		this.port = port;
 	}
 
 	@XmlElement
-	public String getUserBot() {
+	public String getUserBot()
+	{
 		return userBot;
 	}
 
-	public void setUserBot(String userBot) {
+	public void setUserBot(String userBot)
+	{
 		this.userBot = userBot;
 	}
 
 	@XmlElement
-	public String getPasswordBot() {
+	public String getPasswordBot()
+	{
 		return passwordBot;
 	}
 
-	public void setPasswordBot(String passwordBot) {
+	public void setPasswordBot(String passwordBot)
+	{
 		this.passwordBot = passwordBot;
 	}
 

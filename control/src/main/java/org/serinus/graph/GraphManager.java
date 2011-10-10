@@ -16,7 +16,8 @@ import org.neo4j.kernel.EmbeddedGraphDatabase;
 import org.serinus.graph.interceptor.GraphTransaction;
 
 @ApplicationScoped
-public class GraphManager {
+public class GraphManager
+{
 
 	@Inject
 	@Category("graphdb")
@@ -25,10 +26,12 @@ public class GraphManager {
 	private GraphDatabaseService graphDatabaseService;
 	private IndexManager indexManager;
 
-	public void initializeGraphDb() {
+	public void initializeGraphDb()
+	{
 		String repositoryJboss = System.getProperty("jboss.server.data.dir");
 		logger.info("Graph database in " + repositoryJboss);
-		if (repositoryJboss != null) {
+		if (repositoryJboss != null)
+		{
 			graphDatabaseService = new EmbeddedGraphDatabase(repositoryJboss
 					+ "/serinus-graph");
 			logger.info("Graph database in " + repositoryJboss);
@@ -37,35 +40,42 @@ public class GraphManager {
 		}
 	}
 
-	public void shutdownGraphDb() {
+	public void shutdownGraphDb()
+	{
 		graphDatabaseService.shutdown();
 	}
 
-	public GraphDatabaseService getGraphDatabaseService() {
+	public GraphDatabaseService getGraphDatabaseService()
+	{
 		return graphDatabaseService;
 	}
 
 	public void setGraphDatabaseService(
-			GraphDatabaseService graphDatabaseService) {
+			GraphDatabaseService graphDatabaseService)
+	{
 		this.graphDatabaseService = graphDatabaseService;
 	}
 
-	public Index<Node> getIndexPerson() {
+	public Index<Node> getIndexPerson()
+	{
 		logger.debug("Getting person index");
 		return indexManager.forNodes("person");
 	}
-	
-	public Index<Node> getIndexPersonName() {
+
+	public Index<Node> getIndexPersonName()
+	{
 		logger.debug("Getting person index");
 		return indexManager.forNodes("personname");
 	}
 
-	public Index<Node> getIndexTopic() {
+	public Index<Node> getIndexTopic()
+	{
 		logger.debug("Getting topic index");
 		return indexManager.forNodes("topic");
 	}
 
-	public Index<Node> getIndexSerinus() {
+	public Index<Node> getIndexSerinus()
+	{
 		logger.debug("Getting serinus full-text index");
 		return indexManager.forNodes("serinus", MapUtil.stringMap(
 				IndexManager.PROVIDER, "lucene", "type", "fulltext"));

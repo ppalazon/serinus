@@ -32,7 +32,8 @@ import org.serinus.data.Task;
 import org.serinus.http.proxy.SerinusControlHttpProxy;
 import org.slf4j.cal10n.LocLogger;
 
-public class SerinusRosterListener implements RosterListener {
+public class SerinusRosterListener implements RosterListener
+{
 
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
 			Category.BEAN);
@@ -41,28 +42,35 @@ public class SerinusRosterListener implements RosterListener {
 	SerinusControlHttpProxy serinusControlHttpProxy;
 
 	@Override
-	public void entriesAdded(Collection<String> addresses) {
-		for (String user : addresses) {
+	public void entriesAdded(Collection<String> addresses)
+	{
+		for (String user : addresses)
+		{
 			log.info(user);
 		}
 	}
 
 	@Override
-	public void entriesDeleted(Collection<String> addresses) {
-		for (String user : addresses) {
+	public void entriesDeleted(Collection<String> addresses)
+	{
+		for (String user : addresses)
+		{
 			log.info(user);
 		}
 	}
 
 	@Override
-	public void entriesUpdated(Collection<String> addresses) {
-		for (String user : addresses) {
+	public void entriesUpdated(Collection<String> addresses)
+	{
+		for (String user : addresses)
+		{
 			log.info(user);
 		}
 	}
 
 	@Override
-	public void presenceChanged(Presence presence) {
+	public void presenceChanged(Presence presence)
+	{
 		log.info("Presence changed " + presence.getFrom() + " - " + presence);
 
 		Task task = new Task();
@@ -78,7 +86,8 @@ public class SerinusRosterListener implements RosterListener {
 		Response postTask = serinusControlHttpProxy.getSerinusPost().postTask(
 				task);
 
-		if (postTask.getStatus() != Status.OK.getStatusCode()) {
+		if (postTask.getStatus() != Status.OK.getStatusCode())
+		{
 			log.error("Can't connect to Serinus Control");
 		}
 	}

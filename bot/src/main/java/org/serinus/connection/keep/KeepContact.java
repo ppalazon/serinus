@@ -28,7 +28,8 @@ import org.jivesoftware.smack.packet.RosterPacket.ItemType;
 import org.serinus.xmpp.SerinusConnection;
 import org.slf4j.cal10n.LocLogger;
 
-public class KeepContact implements Runnable {
+public class KeepContact implements Runnable
+{
 
 	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
 			Category.BEAN);
@@ -37,16 +38,20 @@ public class KeepContact implements Runnable {
 	SerinusConnection serinusConnection;
 
 	@Override
-	public void run() {
+	public void run()
+	{
 
-		while (true) {
+		while (true)
+		{
 			for (RosterEntry entry : serinusConnection.getXmppConnection()
-					.getRoster().getEntries()) {
+					.getRoster().getEntries())
+			{
 				log.info(entry.getUser());
 
 				Presence presence = serinusConnection.getXmppConnection()
 						.getRoster().getPresence(entry.getUser());
-				if (presence.isAvailable()) {
+				if (presence.isAvailable())
+				{
 					Message mesg = new Message();
 					mesg.setBody("Ey men, how are you?");
 					mesg.setTo(entry.getUser());
@@ -55,9 +60,11 @@ public class KeepContact implements Runnable {
 
 			}
 
-			try {
+			try
+			{
 				Thread.sleep(600000);
-			} catch (InterruptedException e) {
+			} catch (InterruptedException e)
+			{
 				log.error(e.getMessage());
 			}
 

@@ -16,38 +16,46 @@
 
 package org.serinus.cache.data;
 
-public class CacheKey {
+public class CacheKey
+{
 
 	private CacheType type;
 	private String id;
 
-	public CacheKey() {
+	public CacheKey()
+	{
 		super();
 	}
 
-	public CacheKey(CacheType type, String id) {
+	public CacheKey(CacheType type, String id)
+	{
 		this.type = type;
 		this.id = id;
 	}
 
-	public CacheType getType() {
+	public CacheType getType()
+	{
 		return type;
 	}
 
-	public void setType(CacheType type) {
+	public void setType(CacheType type)
+	{
 		this.type = type;
 	}
 
-	public String getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id)
+	{
 		this.id = id;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		StringBuilder builder = new StringBuilder();
 		builder.append(type);
 		builder.append("_");
@@ -56,7 +64,8 @@ public class CacheKey {
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -65,7 +74,8 @@ public class CacheKey {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -73,7 +83,8 @@ public class CacheKey {
 		if (getClass() != obj.getClass())
 			return false;
 		CacheKey other = (CacheKey) obj;
-		if (id == null) {
+		if (id == null)
+		{
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))

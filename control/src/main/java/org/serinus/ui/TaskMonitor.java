@@ -9,12 +9,14 @@ import org.serinus.cache.TaskCache;
 import org.serinus.data.Task;
 
 @ManagedBean
-public class TaskMonitor {
+public class TaskMonitor
+{
 
 	@Inject
 	TaskCache taskCache;
 
-	public List<Task> getAllMessages() {
+	public List<Task> getAllMessages()
+	{
 		return taskCache.getAllMessages();
 	}
 

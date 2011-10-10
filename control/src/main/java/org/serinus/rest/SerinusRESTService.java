@@ -42,7 +42,8 @@ import org.serinus.graph.interceptor.GraphTransaction;
  */
 @RequestScoped
 @Path(value = "/post")
-public class SerinusRESTService implements SerinusPost {
+public class SerinusRESTService implements SerinusPost
+{
 
 	@Inject
 	@Category("serinus")
@@ -59,7 +60,8 @@ public class SerinusRESTService implements SerinusPost {
 	@Produces("application/xml")
 	@Path("/post-task")
 	@Consumes("application/xml")
-	public Response postTask(Task task) {
+	public Response postTask(Task task)
+	{
 
 		log.info(String.valueOf(task));
 
@@ -72,7 +74,8 @@ public class SerinusRESTService implements SerinusPost {
 	@GET
 	@Path("/test/{test:\\S*}")
 	@Produces("text/xml")
-	public Response test(@PathParam("test") String test) {
+	public Response test(@PathParam("test") String test)
+	{
 		log.info(String.valueOf(test));
 
 		return Response.ok().build();

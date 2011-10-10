@@ -20,36 +20,41 @@ import org.serinus.parser.SerinusParser;
 
 @ApplicationScoped
 @GraphTransaction
-public class SerinusDao {
+public class SerinusDao
+{
 	@Inject
 	private GraphManager graphManager;
-	
+
 	@Inject
 	SerinusParser serinuParser;
-	
+
 	public void newSerinusTask(Task task)
 	{
 		Person person = checkCreateUser(Person.EMAIL, task.getAuthor());
-		Doing doing = createDoing(task.getDate(), task.getUuid(), task.getOriginal());
-		person.getUnderlyingNode().createRelationshipTo(doing.getUnderlyingNode(), SerinusRelationshipType.DOING);
-		//Relationship with another person
+		Doing doing = createDoing(task.getDate(), task.getUuid(),
+				task.getOriginal());
+		person.getUnderlyingNode().createRelationshipTo(
+				doing.getUnderlyingNode(), SerinusRelationshipType.DOING);
+		// Relationship with another person
 		serinusRelationshipTopic(doing, task);
-		//Relationship with another topics
-		//serinusRelationshipPerson(doing, task);
+		// Relationship with another topics
+		// serinusRelationshipPerson(doing, task);
 	}
-	
+
 	public void serinusRelationshipTopic(Doing doing, Task task)
 	{
 		List<String> topics = serinuParser.parserTopics(task.getOriginal());
-		for(String top : topics)
+		for (String top : topics)
 		{
 			Topic topic = checkCreateTopic(top);
-			doing.getUnderlyingNode().createRelationshipTo(topic.getUnderlyingNode(), SerinusRelationshipType.ABOUT);
+			doing.getUnderlyingNode().createRelationshipTo(
+					topic.getUnderlyingNode(), SerinusRelationshipType.ABOUT);
 		}
 	}
-	
+
 	/**
 	 * Must wait until have relationship between email and name and username
+	 * 
 	 * @param doing
 	 * @param task
 	 */
@@ -57,61 +62,70 @@ public class SerinusDao {
 	public void serinusRelationshipPerson(Doing doing, Task task)
 	{
 		List<String> users = serinuParser.parserUsers(task.getOriginal());
-		for(String user : users)
+		for (String user : users)
 		{
 			Person person = checkCreateUser(Person.NAME, user);
-			doing.getUnderlyingNode().createRelationshipTo(person.getUnderlyingNode(), SerinusRelationshipType.NAMED);
+			doing.getUnderlyingNode().createRelationshipTo(
+					person.getUnderlyingNode(), SerinusRelationshipType.NAMED);
 		}
 	}
 
-	protected Doing createDoing(Date created, String uuid, String mesg) {
-		Doing doing = new Doing(graphManager.getGraphDatabaseService().createNode());
+	protected Doing createDoing(Date created, String uuid, String mesg)
+	{
+		Doing doing = new Doing(graphManager.getGraphDatabaseService()
+				.createNode());
 		doing.setCreated(created);
 		doing.setUuid(uuid);
 		doing.setDoing(mesg);
 		return doing;
 	}
-	
+
 	protected Person checkCreateUser(String attr, String value)
 	{
-		IndexHits<Node> query = graphManager.getIndexPerson().query(attr, value);
+		IndexHits<Node> query = graphManager.getIndexPerson()
+				.query(attr, value);
 		Node person = query.getSingle();
-		if(person!=null)
+		if (person != null)
 			return new Person(person);
 		else
 		{
 			Person created = createUser(value);
-			graphManager.getIndexPerson().add(created.getUnderlyingNode(), attr, value);
+			graphManager.getIndexPerson().add(created.getUnderlyingNode(),
+					attr, value);
 			return created;
 		}
 	}
-	
+
 	protected Person createUser(String email)
 	{
-		//TODO: Se puede buscar la información del usuario en otro sistema
-		Person person = new Person(graphManager.getGraphDatabaseService().createNode());
+		// TODO: Se puede buscar la información del usuario en otro sistema
+		Person person = new Person(graphManager.getGraphDatabaseService()
+				.createNode());
 		person.setEmail(email);
 		person.setUuid(UUID.randomUUID().toString());
 		return person;
 	}
-	
+
 	protected Topic checkCreateTopic(String topic)
 	{
-		IndexHits<Node> query = graphManager.getIndexTopic().query(Topic.NAME, topic);
+		IndexHits<Node> query = graphManager.getIndexTopic().query(Topic.NAME,
+				topic);
 		Node to = query.getSingle();
-		if(to!=null)
+		if (to != null)
 			return new Topic(to);
 		else
 		{
 			Topic created = createTopic(topic);
-			graphManager.getIndexTopic().add(created.getUnderlyingNode(), Person.NAME, topic);
+			graphManager.getIndexTopic().add(created.getUnderlyingNode(),
+					Person.NAME, topic);
 			return created;
 		}
 	}
-	
+
 	protected Topic createTopic(String topic)
 	{
-		Topic to = new Topic(graphManager.getGraphDatabaseService().createNode());
+		Topic to = new Topic(graphManager.getGraphDatabaseService()
+				.createNode());
 		to.setCreated(new Date());
 		to.setName(topic);
 		to.setUuid(UUID.randomUUID().toString());
