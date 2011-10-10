@@ -42,9 +42,12 @@ public class SerinusBot {
 
 	@Inject
 	private SerinusBotParameters serinusBotParameters;
-	
-	@Inject @Default Connection connection;
-	@Inject KeepContact keepContact;
+
+	@Inject
+	@Default
+	Connection connection;
+	@Inject
+	KeepContact keepContact;
 
 	public void initializeSerinusBot(@Observes ContainerInitialized init) {
 		if (serinusBotParameters.getErrors().size() != 0) {
@@ -52,18 +55,19 @@ public class SerinusBot {
 				log.error(err);
 			}
 		} else {
-			
+
 			try {
 				connection.connect();
-				
+
 				Thread kc = new Thread(keepContact, "Serinus Keep in Contact");
 				kc.start();
-				
-				while(true);
+
+				while (true)
+					;
 			} catch (XMPPException e) {
 				log.error(e.getMessage());
 			}
-			
+
 		}
 	}
 

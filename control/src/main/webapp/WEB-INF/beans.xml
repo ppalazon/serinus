@@ -23,9 +23,6 @@
         http://java.sun.com/xml/ns/javaee 
         http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
 	<interceptors>
-		<class>org.infinispan.cdi.interceptor.CacheResultInterceptor</class>
-		<class>org.infinispan.cdi.interceptor.CacheRemoveEntryInterceptor</class>
-		<class>org.infinispan.cdi.interceptor.CacheRemoveAllInterceptor</class>
 		<class>org.serinus.graph.interceptor.GraphTransactionInterceptor</class>
 	</interceptors>
 </beans>

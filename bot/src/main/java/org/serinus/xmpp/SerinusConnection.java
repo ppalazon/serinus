@@ -22,7 +22,7 @@ import org.jivesoftware.smack.XMPPConnection;
 
 @ApplicationScoped
 public class SerinusConnection {
-	
+
 	private XMPPConnection xmppConnection;
 
 	public XMPPConnection getXmppConnection() {

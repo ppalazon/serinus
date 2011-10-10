@@ -16,9 +16,8 @@
 
 package org.serinus.cache.data;
 
-public enum CacheType
-{
+public enum CacheType {
 
-    AUTHOR, TOPIC, GENERAL
+	AUTHOR, TOPIC, GENERAL
 
 }

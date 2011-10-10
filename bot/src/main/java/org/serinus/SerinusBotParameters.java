@@ -35,10 +35,9 @@ import org.jboss.weld.logging.LoggerFactory;
 import org.serinus.config.SerinusBotConfig;
 import org.slf4j.cal10n.LocLogger;
 
-
 @ApplicationScoped
 public class SerinusBotParameters {
-	
+
 	public List<String> getErrors() {
 		return errors;
 	}
@@ -47,36 +46,36 @@ public class SerinusBotParameters {
 		this.errors = errors;
 	}
 
-	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BOOTSTRAP);
+	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
+			Category.BOOTSTRAP);
 
 	@Inject
 	@Parameters
 	List<String> params;
 	private List<String> errors = new ArrayList<String>();
-	
+
 	@Inject
 	SerinusBotConfig serinusBotConfig;
 
 	@Inject
-	public void validateParameters() {		
+	public void validateParameters() {
 		CommandLineParser parser = new GnuParser();
-		try {			
-			CommandLine line = parser.parse( getCLIOptions(), params.toArray(new String[]{}) );
-			if(line.hasOption("host"))
-			{
-				serinusBotConfig.setHost(line.getOptionValue("host"));				
+		try {
+			CommandLine line = parser.parse(getCLIOptions(),
+					params.toArray(new String[] {}));
+			if (line.hasOption("host")) {
+				serinusBotConfig.setHost(line.getOptionValue("host"));
 			}
-			if(line.hasOption("port"))
-			{
-				serinusBotConfig.setPort(Integer.valueOf(line.getOptionValue("port")));
+			if (line.hasOption("port")) {
+				serinusBotConfig.setPort(Integer.valueOf(line
+						.getOptionValue("port")));
 			}
-			if(line.hasOption("user"))
-			{
-				serinusBotConfig.setUserBot(line.getOptionValue("user"));				
+			if (line.hasOption("user")) {
+				serinusBotConfig.setUserBot(line.getOptionValue("user"));
 			}
-			if(line.hasOption("password"))
-			{
-				serinusBotConfig.setPasswordBot(line.getOptionValue("password"));				
+			if (line.hasOption("password")) {
+				serinusBotConfig
+						.setPasswordBot(line.getOptionValue("password"));
 			}
 		} catch (ParseException e) {
 			errors.add(e.getMessage());
@@ -86,28 +85,26 @@ public class SerinusBotParameters {
 	@SuppressWarnings("static-access")
 	public Options getCLIOptions() {
 		Option host = OptionBuilder.withArgName("host").hasArg()
-				.withDescription("xmpp server host").isRequired(true).create("host");
+				.withDescription("xmpp server host").isRequired(true)
+				.create("host");
 
 		Option user = OptionBuilder.withArgName("user").hasArg()
 				.withDescription("xmpp user for connecting to host")
-				.isRequired(true)
-				.create("user");
+				.isRequired(true).create("user");
 
 		Option pass = OptionBuilder.withArgName("password").hasArg()
-				.withDescription("password for user")
-				.isRequired(true)
+				.withDescription("password for user").isRequired(true)
 				.create("password");
 
 		Option port = OptionBuilder.withArgName("port").hasArg()
-				.withDescription("xmpp port server")
-				.create("port");
-		
+				.withDescription("xmpp port server").create("port");
+
 		Options options = new Options();
 
-		options.addOption( host );
-		options.addOption( port );
-		options.addOption( user );
-		options.addOption( pass );
+		options.addOption(host);
+		options.addOption(port);
+		options.addOption(user);
+		options.addOption(pass);
 
 		return options;
 	}

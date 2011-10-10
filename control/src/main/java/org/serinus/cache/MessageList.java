@@ -21,24 +21,20 @@ import java.util.List;
 
 import org.serinus.data.Task;
 
-public class MessageList
-{
+public class MessageList {
 
-    private List<Task> messages;
+	private List<Task> messages;
 
-    public MessageList()
-    {
-	this.messages = new LinkedList<Task>();
-    }
+	public MessageList() {
+		this.messages = new LinkedList<Task>();
+	}
 
-    public List<Task> getMessages()
-    {
-	return messages;
-    }
+	public List<Task> getMessages() {
+		return messages;
+	}
 
-    public void setMessages(List<Task> messages)
-    {
-	this.messages = messages;
-    }
+	public void setMessages(List<Task> messages) {
+		this.messages = messages;
+	}
 
 }

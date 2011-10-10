@@ -36,20 +36,22 @@ import org.slf4j.cal10n.LocLogger;
 
 @ThreadSerinus
 public class ThreadConnection extends Connection implements Runnable {
-	
-	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BEAN);
-	
+
+	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
+			Category.BEAN);
+
 	@Override
 	public void run() {
-		try {			
-			
+		try {
+
 			connect();
-			
-			while(true);
-			 
+
+			while (true)
+				;
+
 		} catch (XMPPException e) {
 			log.error(e.getMessage());
-		} 
+		}
 	}
 
 }

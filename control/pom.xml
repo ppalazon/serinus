@@ -36,6 +36,7 @@
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 		<!-- Specify the JBoss AS directory to be the JBOSS_HOME environment variable -->
 		<jboss.home>${env.JBOSS7_HOME}</jboss.home>
+		<jbossHome>${env.JBOSS7_HOME}</jbossHome>
 		<infinispan.version>5.0.0.FINAL</infinispan.version>
 		<vaadin.version>6.6.5</vaadin.version>
 		<gwt.version>2.3.0</gwt.version>
@@ -115,7 +116,7 @@
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-container</artifactId>
-			<version>1.0.0.CR1</version>
+			<version>1.0.0.CR4</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -248,7 +249,7 @@
 				<dependency>
 					<groupId>org.jboss.as</groupId>
 					<artifactId>jboss-as-arquillian-container-managed</artifactId>
-					<version>7.0.0.CR1</version>
+					<version>7.0.1.Final</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
@@ -263,7 +264,7 @@
 				<dependency>
 					<groupId>org.jboss.as</groupId>
 					<artifactId>jboss-as-arquillian-container-remote</artifactId>
-					<version>7.0.0.CR1</version>
+					<version>7.0.1.Final</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>

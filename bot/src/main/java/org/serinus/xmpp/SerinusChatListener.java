@@ -27,30 +27,31 @@ import org.jivesoftware.smack.XMPPException;
 import org.slf4j.cal10n.LocLogger;
 
 public class SerinusChatListener implements ChatManagerListener {
-	
-	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BEAN);
-	
-	@Inject 
+
+	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
+			Category.BEAN);
+
+	@Inject
 	SerinusMessageListener serinusMessageListener;
-	
-	@Inject SerinusConnection serinusConnection;
+
+	@Inject
+	SerinusConnection serinusConnection;
 
 	@Override
 	public void chatCreated(Chat chat, boolean createdLocally) {
-		
-		if(!createdLocally)
+
+		if (!createdLocally)
 			chat.addMessageListener(serinusMessageListener);
-		
-		checkUserInRoster(chat);		
+
+		checkUserInRoster(chat);
 	}
-	
-	public void checkUserInRoster(Chat chat)
-	{
+
+	public void checkUserInRoster(Chat chat) {
 		Roster roster = serinusConnection.getXmppConnection().getRoster();
-		if(!roster.contains(chat.getParticipant()))
-		{
+		if (!roster.contains(chat.getParticipant())) {
 			try {
-				roster.createEntry(chat.getParticipant(), chat.getParticipant(), new String[]{});
+				roster.createEntry(chat.getParticipant(),
+						chat.getParticipant(), new String[] {});
 			} catch (XMPPException e) {
 				log.error(e.getMessage());
 			}

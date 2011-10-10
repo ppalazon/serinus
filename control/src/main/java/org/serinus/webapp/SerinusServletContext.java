@@ -10,28 +10,25 @@ import org.jboss.seam.solder.logging.Category;
 import org.serinus.graph.GraphManager;
 
 @WebListener
-public class SerinusServletContext implements ServletContextListener
-{
-    
-    @Inject
-    GraphManager graphManager;
-    
-    @Inject
-    @Category("serinus-web")
-    Logger logger;
+public class SerinusServletContext implements ServletContextListener {
 
-    @Override
-    public void contextInitialized(ServletContextEvent sce)
-    {
-	logger.info("Initialize Serinus Application");
-	graphManager.initializeGraphDb();
-    }
+	@Inject
+	GraphManager graphManager;
 
-    @Override
-    public void contextDestroyed(ServletContextEvent sce)
-    {
-	logger.info("Close Serinus Application");
-	graphManager.shutdownGraphDb();
-    }
+	@Inject
+	@Category("serinus-web")
+	Logger logger;
+
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		logger.info("Initialize Serinus Application");
+		graphManager.initializeGraphDb();
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		logger.info("Close Serinus Application");
+		graphManager.shutdownGraphDb();
+	}
 
 }

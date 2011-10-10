@@ -1,6 +1,7 @@
 package org.serinus.graph;
 
-public enum SerinusRelationshipType
-{
-    ABOUT, NAMED, DOING
+import org.neo4j.graphdb.RelationshipType;
+
+public enum SerinusRelationshipType implements RelationshipType {
+	ABOUT, NAMED, DOING
 }

@@ -22,8 +22,9 @@ import org.jivesoftware.smack.ConnectionListener;
 import org.slf4j.cal10n.LocLogger;
 
 public class SerinusConnectionListener implements ConnectionListener {
-	
-	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BEAN);
+
+	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
+			Category.BEAN);
 
 	@Override
 	public void connectionClosed() {

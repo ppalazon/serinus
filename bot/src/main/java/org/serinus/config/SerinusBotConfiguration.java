@@ -32,22 +32,22 @@ import org.slf4j.cal10n.LocLogger;
 public class SerinusBotConfiguration {
 
 	private SerinusBotConfig serinusBotConfig;
-	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BOOTSTRAP);
-	
+	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
+			Category.BOOTSTRAP);
+
 	@PostConstruct
-	public void construct()
-	{
+	public void construct() {
 		serinusBotConfig = new SerinusBotConfig();
 	}
-	
-	public void loadConfiguration() throws JAXBException
-	{
+
+	public void loadConfiguration() throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance(SerinusBotConfig.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		
-		serinusBotConfig = (SerinusBotConfig) unmarshaller.unmarshal(new File("serinus.xml"));
-		
-		log.info("Load SyncTime "+serinusBotConfig);
+
+		serinusBotConfig = (SerinusBotConfig) unmarshaller.unmarshal(new File(
+				"serinus.xml"));
+
+		log.info("Load SyncTime " + serinusBotConfig);
 	}
 
 	public SerinusBotConfig getSerinusBotConfig() {

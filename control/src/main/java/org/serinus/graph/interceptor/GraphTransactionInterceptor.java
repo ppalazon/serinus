@@ -12,31 +12,30 @@ import org.serinus.graph.GraphManager;
 
 @GraphTransaction
 @Interceptor
-public class GraphTransactionInterceptor
-{
+public class GraphTransactionInterceptor {
 
-    @Inject
-    GraphManager graphManager;
+	@Inject
+	GraphManager graphManager;
 
-    /**
-     * http://wiki.neo4j.org/content/Transactions
-     * 
-     * @param ctx
-     * @return
-     * @throws Exception
-     */
-    @AroundInvoke
-    public Object manageTransaction(InvocationContext ctx) throws Exception
-    {
-	Transaction graphTrans = graphManager.getGraphDatabaseService().beginTx();
-	Object result = null;
-	try {
-	    result = ctx.proceed();
-	    graphTrans.success();
-	} finally {
-	    graphTrans.finish();
+	/**
+	 * http://wiki.neo4j.org/content/Transactions
+	 * 
+	 * @param ctx
+	 * @return
+	 * @throws Exception
+	 */
+	@AroundInvoke
+	public Object manageTransaction(InvocationContext ctx) throws Exception {
+		Transaction graphTrans = graphManager.getGraphDatabaseService()
+				.beginTx();
+		Object result = null;
+		try {
+			result = ctx.proceed();
+			graphTrans.success();
+		} finally {
+			graphTrans.finish();
+		}
+		return result;
 	}
-	return result;
-    }
 
 }

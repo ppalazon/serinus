@@ -37,19 +37,25 @@ import org.slf4j.cal10n.LocLogger;
 
 @Default
 public class Connection {
-	
-	private LocLogger log = LoggerFactory.loggerFactory().getLogger(Category.BEAN);
-	
-	@Inject SerinusBotConfig serinusBotConfig;
-	
-	@Inject SerinusConnectionListener serinusConnectionListener;
-	@Inject SerinusChatListener serinusChatListener;
-	@Inject SerinusRosterListener serinusRosterListener;
-	@Inject SerinusFileTransferListener serinusFileTransferListener;
-	@Inject SerinusConnection serinusConnection;
-	
-	public void connect() throws XMPPException
-	{
+
+	private LocLogger log = LoggerFactory.loggerFactory().getLogger(
+			Category.BEAN);
+
+	@Inject
+	SerinusBotConfig serinusBotConfig;
+
+	@Inject
+	SerinusConnectionListener serinusConnectionListener;
+	@Inject
+	SerinusChatListener serinusChatListener;
+	@Inject
+	SerinusRosterListener serinusRosterListener;
+	@Inject
+	SerinusFileTransferListener serinusFileTransferListener;
+	@Inject
+	SerinusConnection serinusConnection;
+
+	public void connect() throws XMPPException {
 		ConnectionConfiguration cc = new ConnectionConfiguration(
 				serinusBotConfig.getHost(), serinusBotConfig.getPort());
 		cc.setCompressionEnabled(true);
@@ -59,9 +65,9 @@ public class Connection {
 
 		// Create a connection to the igniterealtime.org XMPP server.
 		XMPPConnection con = new XMPPConnection(cc);
-		
+
 		serinusConnection.setXmppConnection(con);
-		
+
 		// Connect to the server
 		con.connect();
 
@@ -75,16 +81,16 @@ public class Connection {
 		// Send the packet (assume we have a Connection instance called
 		// "con").
 		con.sendPacket(presence);
-		
+
 		con.addConnectionListener(serinusConnectionListener);
 		con.getChatManager().addChatListener(serinusChatListener);
-		
+
 		con.getRoster().setSubscriptionMode(SubscriptionMode.accept_all);
 		con.getRoster().addRosterListener(serinusRosterListener);
-		
+
 		FileTransferManager ftm = new FileTransferManager(con);
 		ftm.addFileTransferListener(serinusFileTransferListener);
-		
+
 	}
 
 }
